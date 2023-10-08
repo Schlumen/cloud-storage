@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react"
 import { Card, Button, Form, Alert } from 'react-bootstrap'
 import { useAuth } from "../context/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function UpdateProfile() {
     const emailRef = useRef();
@@ -10,7 +10,7 @@ export default function UpdateProfile() {
     const { currentUser, updateEmail, updatePassword } = useAuth();
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
-    const navigate = useNavigate();
+    const [message, setMessage] = useState("");
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -20,16 +20,24 @@ export default function UpdateProfile() {
         }
 
         setError("");
+        setMessage("");
         setLoading(true);
 
         try {
+            let updatedSomething = false;
             if (emailRef.current.value !== currentUser.email) {
                 await updateEmail(emailRef.current.value);
+                updatedSomething = true;
             }
             if (passwordRef.current.value) {
                 await updatePassword(passwordRef.current.value);
+                passwordRef.current.value = "";
+                passwordConfirmRef.current.value = "";
+                updatedSomething = true;
             }
-            navigate("/");
+            if (updatedSomething) {
+                setMessage("Profile successfully updated.");
+            }
         } catch {
             setError("Failed to update account");
         }
@@ -42,6 +50,7 @@ export default function UpdateProfile() {
                 <Card.Body>
                     <h2 className='text-center mb-4'>Update Profile</h2>
                     {error && <Alert variant="danger">{error}</Alert>}
+                    {message && <Alert variant="success">{message} <Link to="/">Go to Profile</Link></Alert>}
                     <Form onSubmit={handleSubmit}>
                         <Form.Group id="email">
                             <Form.Label>Email</Form.Label>
