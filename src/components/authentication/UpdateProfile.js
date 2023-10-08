@@ -1,7 +1,8 @@
 import React, { useRef, useState } from "react"
 import { Card, Button, Form, Alert } from 'react-bootstrap'
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
+import CenteredContainer from "./CenteredContainer";
 
 export default function UpdateProfile() {
     const emailRef = useRef();
@@ -45,12 +46,12 @@ export default function UpdateProfile() {
     }
 
     return (
-        <>
+        <CenteredContainer>
             <Card>
                 <Card.Body>
                     <h2 className='text-center mb-4'>Update Profile</h2>
                     {error && <Alert variant="danger">{error}</Alert>}
-                    {message && <Alert variant="success">{message} <Link to="/">Go to Profile</Link></Alert>}
+                    {message && <Alert variant="success">{message} <Link to="/user">Go to Profile</Link></Alert>}
                     <Form onSubmit={handleSubmit}>
                         <Form.Group id="email">
                             <Form.Label>Email</Form.Label>
@@ -69,8 +70,8 @@ export default function UpdateProfile() {
                 </Card.Body>
             </Card>
             <div className='w-100 text-center mt-2'>
-                <Link to="/">Cancel</Link>
+                <Link to="/user">Cancel</Link>
             </div>
-        </>
+        </CenteredContainer>
     )
 }

@@ -1,31 +1,31 @@
-import Signup from "./Signup";
-import Login from "./Login";
-import ForgotPassword from "./ForgotPassword";
-import Dashboard from "./Dashboard";
-import UpdateProfile from "./UpdateProfile";
-import PrivateRoute from "./PrivateRoute";
-import { Container } from "react-bootstrap";
+import Signup from "./authentication/Signup";
+import Login from "./authentication/Login";
+import ForgotPassword from "./authentication/ForgotPassword";
+import Profile from "./authentication/Profile";
+import UpdateProfile from "./authentication/UpdateProfile";
+import PrivateRoute from "./authentication/PrivateRoute";
 import { AuthProvider } from "../context/AuthContext";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
     return (
-        <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "100vh" }}>
-            <div className="w-100" style={{ maxWidth: "400px" }}>
-                <Router>
-                    <AuthProvider>
-                        <Routes>
-                            <Route exact path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
-                            <Route path="/update-profile" element={<PrivateRoute><UpdateProfile /></PrivateRoute>} />
-                            <Route path="/signup" Component={Signup} />
-                            <Route path="/login" Component={Login} />
-                            <Route path="/forgot-password" Component={ForgotPassword} />
-                        </Routes>
-                    </AuthProvider>
-                </Router>
-            </div>
-        </Container>
+        <Router>
+            <AuthProvider>
+                <Routes>
+                    {/* Drive */}
 
+
+                    {/* Profile */}
+                    <Route path="/user" element={<PrivateRoute><Profile /></PrivateRoute>} />
+                    <Route path="/update-profile" element={<PrivateRoute><UpdateProfile /></PrivateRoute>} />
+
+                    {/* Auth */}
+                    <Route path="/signup" Component={Signup} />
+                    <Route path="/login" Component={Login} />
+                    <Route path="/forgot-password" Component={ForgotPassword} />
+                </Routes>
+            </AuthProvider>
+        </Router>
     );
 }
 
