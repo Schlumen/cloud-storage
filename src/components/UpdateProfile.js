@@ -19,24 +19,21 @@ export default function UpdateProfile() {
             return setError("Passwords do not match");
         }
 
-        const promises = [];
         setError("");
         setLoading(true);
 
-        if (emailRef.current.value !== currentUser.email) {
-            promises.push(updateEmail(emailRef.current.value));
-        }
-        if (passwordRef.current.value) {
-            promises.push(updatePassword(passwordRef.current.value));
-        }
-
-        Promise.all(promises).then(() => {
+        try {
+            if (emailRef.current.value !== currentUser.email) {
+                await updateEmail(emailRef.current.value);
+            }
+            if (passwordRef.current.value) {
+                await updatePassword(passwordRef.current.value);
+            }
             navigate("/");
-        }).catch(() => {
+        } catch {
             setError("Failed to update account");
-        }).finally(() => {
-            setLoading(false);
-        });
+        }
+        setLoading(false);
     }
 
     return (
