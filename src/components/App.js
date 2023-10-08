@@ -4,6 +4,7 @@ import ForgotPassword from "./authentication/ForgotPassword";
 import Profile from "./authentication/Profile";
 import UpdateProfile from "./authentication/UpdateProfile";
 import PrivateRoute from "./authentication/PrivateRoute";
+import Dashboard from "./drive/Dashboard";
 import { AuthProvider } from "../context/AuthContext";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -13,7 +14,7 @@ function App() {
             <AuthProvider>
                 <Routes>
                     {/* Drive */}
-
+                    <Route exact path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>}></Route>
 
                     {/* Profile */}
                     <Route path="/user" element={<PrivateRoute><Profile /></PrivateRoute>} />
