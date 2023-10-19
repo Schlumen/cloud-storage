@@ -15,7 +15,7 @@ export default function Folder({ folder }) {
             variant="outline-dark"
             className="text-truncate w-100"
         >
-            <FontAwesomeIcon icon={faFolder} className="mr-2" style={{ marginRight: "10px" }} />
+            <FontAwesomeIcon icon={faFolder} className="me-2" />
             {folder.name}
         </Button>
     )
