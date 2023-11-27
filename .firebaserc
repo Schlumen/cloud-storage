@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "default": "cloud-storage-dev-74fe1",
+    "dev": "cloud-storage-dev-74fe1",
+    "cloud-production": "cloud-storage-a3aab"
+  },
+  "targets": {},
+  "etags": {}
+}

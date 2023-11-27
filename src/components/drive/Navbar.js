@@ -7,7 +7,7 @@ export default function NavbarComponent() {
         <Navbar bg='light' expand='sm' className='justify-content-between'>
             <Container fluid>
                 <Navbar.Brand as={Link} to='/'>
-                    LCS Drive
+                    Cloud Storage
                 </Navbar.Brand>
                 <Nav.Link as={Link} to='/user'>
                     Profile
